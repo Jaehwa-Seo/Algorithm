@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <cmath>
 
 using namespace std;
 
@@ -14,6 +15,8 @@ int main()
 
     vector<int> number;
 
+    int arr[8001] = {0,};
+
     for(int i=0;i<n;i++)
     {
         int tmp;
@@ -23,30 +26,36 @@ int main()
         avg += tmp;
 
         number.push_back(tmp);
+
+        arr[tmp+4000]++;
     }
 
     sort(number.begin(),number.end());
 
-    int count = 1;
-    map<int,int> count;
+    int count = 0;
 
-    for(int i=0;i<n;i++)
+    vector<int> cnt;
+
+    for(int i=-4000;i<4001;i++)
     {
-        if(!count[number[i]])
-            count[number[i]] = 1;
-        else
+        if(count < arr[i+4000])
         {
-            count[number[i]]++;
+            count = arr[i+4000];
+
+            cnt.clear();
+            cnt.push_back(i);
+        }
+        else if(count == arr[i+4000])
+        {
+            cnt.push_back(i);
         }
     }
 
-    for(int i=0;i<count.k;i++)
-    {
-        
-    }
-
-    // cout << avg / n << "\n";
-    // cout << number[n/2] << "\n";
-    // cout << count_max_number << "\n";
-    // cout << number[n-1] - number[0] << "\n";
+    cout << (int)round((double)avg / n) << "\n";
+    cout << number[n/2] << "\n";
+    if(cnt.size() >=2)
+        cout << cnt[1] << "\n";
+    else
+        cout << cnt[0] << "\n";
+    cout << number[n-1] - number[0] << "\n";
 }
