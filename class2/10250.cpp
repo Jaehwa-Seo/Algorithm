@@ -1,29 +1,29 @@
 #include <iostream>
-
 using namespace std;
 
-int main()
-{
-    int t;
-    
-    cin >> t;
+int main() {
 
-    for(int i=0;i<t;i++)
-    {
-        int h,w,n;
+	int T = 0;
+	cin >> T;
 
-        cin >> h >> w >> n;
+	while (T--) {
+		int H, W, N = 0;	//높이, 넓이, 손님 번호
+		cin >> H >> W >> N;
 
-        int floor, room;
+		int roomNumber = 0;
 
-        room = (n / h);
-        floor = n % h;
-        
-        if(floor == 0)
-            floor = h;
-        
-        printf("%d%02d\n",floor,room+1);
-    }
+		if (N % H == 0) {
+			roomNumber = H;
+			roomNumber *= 100;
+			roomNumber += (N / H);
+		}
+		else {
+			roomNumber = N % H;
+			roomNumber *= 100;
+			roomNumber += (N / H + 1);
+		}
 
-    
+		cout << roomNumber << endl;
+
+	}
 }
