@@ -1,33 +1,37 @@
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
-void z_input(int n, int number,int x, int y)
-{
-    if(n == 1)
-    {
-        arr[x][y] = number;
-        arr[x+1][y] = number+1;
-        arr[x][y+1] = number+2;
-        arr[x+1][y+1] = number+3;
+int r,c;
+int result = 0;
+
+void divide(int x, int y, int n) {
+    
+    if(x == r && y == c) {
+        cout << result;
+        exit(0);
     }
-    else
+    
+    if(!(r <= x + n - 1 && c <= y + n - 1))
     {
-        z_input(n/2,number+pow(4,n),x,y);
-        z_input(n/2,number+(pow(4,n)*2),x+(2*n),y);
-        z_input(n/2,number+(pow(4,n)*3),x,y+(2*n));
-        z_input(n/2,number+(pow(4,n)*4),x+(2*n),y+(2*n));
+        
+        result += n * n;
+        return;
     }
+    
+    divide(x, y, n / 2); 
+    divide(x, y + n / 2, n / 2); 
+    divide(x + n / 2, y, n / 2); 
+    divide(x + n / 2, y + n / 2, n / 2); 
+    
 }
-// 1 1
-// 2 4
-// 3 16
-// 4 64
+
 int main()
 {
-    int N, r, c;
+    int N;
 
     cin >> N >> r >> c;
 
-    z_input(N,0,0,0);
+    divide(0,0,pow(2,N));
 }
